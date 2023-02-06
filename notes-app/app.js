@@ -1,34 +1,33 @@
 // const fs = require('fs');
 // const utilName = require('./utils')
 // const validator = require('validator')
-// const chalk = require('chalk')
+const chalk = require('chalk')
 // console.log(validator.isEmail('avinash@gmail.com'))
 // console.log(chalk.green('Success!'));
 // fs.writeFileSync('notes.txt', 'This file is created using Node.js!');
 // fs.appendFileSync('notes.txt', ' Testing appendFileSync function.')
 // console.log(utilName)
-
+const notes = require('./notes.js')
 const yargs = require('yargs');
 yargs.version('1.1.0');
 
 yargs.command({
-    command:'add',
-    describe:'Add a new note!',
-    builder:{
-        title:{
-        describe:'Note Title',
-        demandOption:true,
-        type:'string'
+    command: 'add',
+    describe: 'Add a new note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        },
+        body: {
+            describe: 'Note body',
+            demandOption: true,
+            type: 'string'
+        }
     },
-    body:{
-        describe:'Note Body',
-        demandOption:true,
-        type:'string'
-    }
-},
-    handler: function(argv){
-        console.log('Title:' + argv.title)
-        console.log('Body:' + argv.body)
+    handler(argv) {
+        notes.addNote(argv.title, argv.body)
     }
 })
 
